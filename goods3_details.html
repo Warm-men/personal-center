@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!-- saved from url=(0072)http://sen03.3gtuangou.mobi/plugin.php?id=hejin_toupiao&model=rank&vid=1
+-->
+<html xmlns="http://www.w3.org/1999/html">
+  
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta charset="utf-8">
+    <title>商品详情</title>
+    <meta name="description" content="">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/jquery-2.1.3.min.js" type="text/javascript"></script>
+
+
+    <style>
+      html, body {position: relative;height: 100%;}
+      body {
+          background: #eee;
+          font-family: "Mircrosoft Yahei","微软雅黑",Tahoma, Arial, Helvetica, STHiti;
+          color:#323232;
+          margin: 0;
+          padding: 0;
+          min-width: 320px;
+          max-width: 640px;
+          /*min-height: 568px;*/
+          margin: auto;
+          overflow-x: hidden;
+      }
+
+    </style>
+  </head>
+  
+  <body>
+    
+       <div class="containt ">
+          
+          <!-- 商品图片 -->
+          <div class="goods_img_box">
+            <div class="goods_img"><img src="img/goods_b2.png" class="" id=""></div>
+          </div>
+
+          <!-- 商品价格 -->
+          <div class="goods_prize_box">
+            <div class="goods_name">10元流量卡</div>
+            <div class="goods_prize_txt">
+               <label class="select_goods"><img src="img/choose.png"></label>
+               <label class="prize">1000</label>
+               元宝
+            </div>
+            <!-- <div class="reference_prize">市场参考价：10.00元</div> -->
+          </div>
+
+          <div class="describe">商品描述</div>
+
+          <!-- 商品描述 -->
+          <div class="goods_describe">
+            <div class="describe_txt">品名：10元流量卡</div>
+            <div class="describe_txt">品牌：中国移动</div>
+            <div class="describe_txt">规格：10元卡</div>
+          </div>
+          <div class="empty15"></div>
+        
+          <!-- 底部兑换按钮 -->
+
+          <div class="exchange">
+            <div class="integral_box fl">
+              <div class="integral_txt">单价：<label class="integral_num">1000</label><label class="integral">元宝</label></div>
+            </div>
+            <div class="exchange_btn_box fr">
+              <div class="exchange_btn" id="">我要兑换</div>
+            </div>
+          </div>
+         
+       </div>
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+       $(".exchange_btn").on('click',function(){
+        alert("不好意思，您现在的元宝足以兑换该商品，请赚够元宝再来兑换。")
+       });
+    });
+  </script>
+  </body>
+
+</html>

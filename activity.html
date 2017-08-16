@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!-- saved from url=(0072)http://sen03.3gtuangou.mobi/plugin.php?id=hejin_toupiao&model=rank&vid=1
+-->
+<html xmlns="http://www.w3.org/1999/html">
+  
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta charset="utf-8">
+    <title>活动历史</title>
+    <meta name="description" content="">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/jquery-2.1.3.min.js" type="text/javascript"></script>
+
+
+    <style>
+      html, body {position: relative;height: 100%;}
+      body {
+          background: #fff;
+          font-family: "Mircrosoft Yahei","微软雅黑",Tahoma, Arial, Helvetica, STHiti;
+          color:#000;
+          margin: 0;
+          padding: 0;
+          min-width: 320px;
+          max-width: 640px;
+          min-height: 568px;
+          margin: auto;
+          overflow-x: hidden;
+      }
+      .containt:after{content: ".";width: 100%;height: 3em;}
+    </style>
+  </head>
+  
+  <body>
+    
+       <div class="containt ">
+         <!-- 暂无 -->
+           <div class="nullNow" style="display:none" id="nullNow">亲，您暂时没有参加过任何活动哦。</div>
+         <!-- 活动 -->
+         <!-- <div class="activity_list clearfix"></div> -->
+         <!-- <div class="activity_list clearfix"> -->
+           <!-- 活动图片 -->
+           <!-- <div class="activity_img fl"><img src="img/act.png" alt="活动图片"></div> -->
+           <!-- 活动详情 -->
+           <!-- <div class="activity_con fl">
+             <div class="activity_tit">已经成功报名肯德基后厨探秘</div>
+             <div class="activity_text">周六下午2:00福田肯地基后厨基地探秘活动</div>
+             <div class="activity_date">2016-01-03&nbsp;&nbsp;&nbsp;15:32:12</div>
+           </div>   
+         </div> -->
+
+
+         
+        <div class="empty5"></div>
+       </div>
+
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $(function(){
+            $.ajax({
+             type: "get",
+             async: false,
+             url: "http://activity.cnmobi.com.cn/activity/personal-center/activitys.html?pageNo=1",
+             dataType: "jsonp",
+             jsonpCallback:"callbackfunction",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
+             success: function(json){
+                 $('.containt').html("");
+                  var obj = eval(json);
+                  if (json.code == 40001) {
+                          location.href = "http://activity.cnmobi.com.cn/activity/personal-center/start.html";
+                       }
+                  else if (obj == null) {$('.nullNow').show();}
+                  else{
+                    $(obj).each(function(index) {
+                     var val = obj[index];
+                     var htmlText="<div class='activity_list clearfix'><div class='activity_img fl'><img src='img/act.png' alt='活动图片'></div><div class='activity_con fl'><div class='activity_tit'>"+val.name+"</div><div class='activity_date'>"+val.createDate+"</div></div></div>";
+                     $(".containt").append(htmlText);
+                  });
+                  }
+             },
+             error: function(){}
+         });
+        });
+      })
+    </script>
+
+
+
+  </body>
+
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<!-- saved from url=(0072)http://sen03.3gtuangou.mobi/plugin.php?id=hejin_toupiao&model=rank&vid=1
+-->
+<html xmlns="http://www.w3.org/1999/html">
+
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta charset="utf-8">
+    <title>商品详情</title>
+    <meta name="description" content="">
+    <link rel="stylesheet" href="./css/style.css">
+
+
+
+    <style>
+      html, body {position: relative;height: 100%;}
+      body {
+          background: #eee;
+          font-family: "Mircrosoft Yahei","微软雅黑",Tahoma, Arial, Helvetica, STHiti;
+          color:#323232;
+          margin: 0;
+          padding: 0;
+          min-width: 320px;
+          max-width: 640px;
+          /*min-height: 568px;*/
+          margin: auto;
+          overflow-x: hidden;
+      }
+      .popu_box{ display: flex; justify-content: center; align-items: center;
+          align-content:center; width: 100%;height: 100%;position: fixed;top: 0;left: 0;background: rgba(0,0,0,0.55);}
+      .empty20{width: 100%;height: 20%;}
+      .txt_box{width: calc(100% - 60px);border-radius: 5px;background: #fff;padding: 10px 0;margin: auto;position: relative;}
+      .hide_btn{width:3rem;height: 3rem;position: absolute;top: -10px;right: -10px;background: url('./img/delete.png')center no-repeat;background-size: 100% 100%;}
+      .txt_box_list{width: 100%;height: 2rem;line-height: 2rem;box-sizing: border-box;margin-top: 10%;font-size: 1.5rem; display: flex; justify-content: center; align-items: center;
+          align-content:center; }
+      .txt_box_list:first-child{margin-top: 0}
+      .txt_box_list:nth-child(2){margin-top: 10%}
+      .addressBox{
+          height: auto;
+      }
+      .txt_box_list>div{width: 100%;height: 100%;text-align: center;color: #323232;font-size: 1.5rem;}
+      .txt_box_list>span{margin-right: 5%;color: #676565;display: inline-block;width: 35%; font-size: 1.5rem; text-align: right;text-indent: 1rem;
+        margin-top: 4px;}
+      .txt_box_list input{width: 45%;border: none;float: right;margin-right: 10%; font-size: 1.5rem;
+          display: inline-block;}
+      .txt_box_list textarea{width: 50%;height: 5rem; border: 1px solid #8f8f8f; border-radius: .3rem; float: right;margin-right: 10%; font-size: 1.5rem;
+          padding: 0.5rem; }
+      .confirm_btn{width: 100%; margin: 10% 0 5% 0; }
+      .confirm{padding: 2% 0;margin: auto;width: 30%;text-align: center;background: #638dec;color: #fff;border-radius: 1.5rem;font-size: 1.5rem;}
+      .last_integral{width: 93%;padding: 1rem 0; color: #323232;font-size: 1.2rem;bottom: 2%;margin-left: 7%;}
+      .last_integral span{font-size: 1.2rem;color: #f74d4d;}
+    </style>
+  </head>
+
+  <body>
+
+       <div class="containt ">
+
+          <!-- 商品图片 -->
+          <div class="goods_img_box" style="position: relative;">
+            <div class="goods_img"><img src="" class="" id="goods_img"></div>
+            <div class="last_integral">您的可用元宝为：<span id="last_integral"></span></div>
+          </div>
+
+          <!-- 商品价格 -->
+          <div class="goods_prize_box">
+            <div class="goods_name" id="goods_name"></div>
+            <div class="goods_prize_txt">
+               <label class="select_goods"><img src="img/choose.png"></label>
+               <label class="prize" id="price"></label>
+               元宝
+            </div>
+            <div class="reference_prize" id="reference_prize"></div>
+          </div>
+
+          <div class="describe">商品描述</div>
+
+          <!-- 商品描述 -->
+          <div class="goods_describe">
+            <div class="describe_txt" id="goods_describe"></div>
+            <!-- <div class="describe_txt">品牌：中石化</div> -->
+            <!-- <div class="describe_txt">规格：100元卡</div> -->
+          </div>
+          <div class="empty15"></div>
+
+          <!-- 底部兑换按钮 -->
+
+          <div class="exchange">
+            <div class="integral_box fl">
+              <div class="integral_txt">单价：<label class="integral_num" id="integral_num"></label><label class="integral">元宝</label></div>
+            </div>
+            <div class="exchange_btn_box fr">
+              <div class="exchange_btn" id="exchange">我要兑换</div>
+            </div>
+          </div>
+
+           <!--提示-->
+           <div class="tipBox" style="display: none">
+               <label id="tip"></label>
+           </div>
+       </div>
+        <!--===========输入兑换信息===============-->
+       <div class="popu_box" style="display: none;">
+         <!--<div class="empty20"></div>-->
+         <div class="txt_box">
+            <div class="hide_btn"></div>
+            <div class="txt_box_list">
+                <div>填写你的收货信息</div>
+            </div>
+            <div class="txt_box_list">
+                <span>您的姓名：</span>
+                <input type="text" name="" placeholder="请输入姓名" id="receiver">
+            </div>
+            <div class="txt_box_list">
+                <span>手机号码：</span>
+                <input type="text" name="" placeholder="请输入手机号码" maxlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')"  onafterpaste="this.value=this.value.replace(/\D/g,'')" id="phone">
+            </div>
+             <div class="txt_box_list addressBox" style="display: none;">
+                 <span>地址:</span>
+                 <textarea id="address"></textarea>
+             </div>
+            <div class="confirm_btn">
+              <div class="confirm" id="confirm">确定</div>
+            </div>
+         </div>
+       </div>
+
+       <!--======================兑换成功==================-->
+       <div class="exchangeSuccessPupoBox" style="display: none">
+           <div class="exchangeSuccessBox">
+               <div class="tipIcon"><i class="iconfont">&#xe62e;</i></div>
+               <div class="exchangeSuccessText">恭喜你，奖品已兑换成功，我们将以电话或者短信的方式联系您！</div>
+               <div class="exchangeSuccessBtn" id="yesIGotIt">确定</div>
+
+           </div>
+       </div>
+       <script src="./js/jquery-2.1.3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+        var lastIntegral = 0,
+            needInregral = 0;
+        var id;
+        var goodName;
+        var needAddress;
+        var sendData;
+        var address ="";
+        $(function(){
+            $.ajax({
+                 type: "get",
+                 async: false,
+                 url: "http://activity.cnmobi.com.cn/activity/personal-center/earn.html?pageNo=1",
+                 dataType: "jsonp",
+                 jsonpCallback:"callbackfunction",
+                 success: function(json){
+                     $('#last_integral').html("");
+                     $('#last_integral').html(json.leftIntegral);
+                     lastIntegral = json.leftIntegral;
+                 },
+                 error: function(){
+                 }
+             });
+        });
+
+        function request(name) {
+          var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+          var r = window.location.search.substr(1).match(reg);
+          if (r != null) {
+              return unescape(r[2]);
+          }
+          return null;
+        }
+
+        $(function(){
+          id = request("goodsId");
+          var goUrl = "http://activity.cnmobi.com.cn/activity/personal-center/goods_detail.html?goodsId="+id;
+          getDetail();
+            function getDetail(){
+              $.ajax({
+               type: "get",
+               async: false,
+               url: goUrl,
+               dataType: "jsonp",
+               jsonpCallback:"callbackfunction",
+               success: function(json){
+                   if (json.code == 40001) {
+                            location.href = "http://activity.cnmobi.com.cn/activity/personal-center/start.html";
+                         }
+                   var protoPrice = json.integral,
+                       price = (Number(protoPrice/100)).toFixed(2);
+                   $('#goods_img').html("");
+                   $('#goods_img').attr('src',json.image);
+                   $("#goods_name").html("");
+                   $('#goods_name').html(json.name);
+                   $("#price").html("");
+                   $('#price').html(json.integral);
+                   $("#reference_prize").html("");
+                   $('#reference_prize').html("市场参考价："+price+"元");
+                   $("#goods_describe").html("");
+                   $('#goods_describe').html(json.content);
+                   $("#integral_num").html("");
+                   $('#integral_num').html(json.integral);
+                   needInregral = json.integral;
+                   needAddress = json.send;
+                   goodName = json.name;
+//                   alert(needAddress);
+                   if ( needAddress == "true" ){
+                       $(".addressBox").show();
+                   }else if ( needAddress == "false" ){
+                       address = "";
+                   };
+               },
+               error: function(){
+               }
+           });
+          };
+        });
+
+
+       $("#exchange").on('click',function(){
+        if ( parseInt(lastIntegral) < parseInt(needInregral) ) {
+            //alert("您当前的元宝不够兑换该商品！");
+            $('.tipBox').fadeIn();
+            $('#tip').text("您当前的元宝不够兑换该商品");
+            setTimeout(function () {
+                $('.tipBox').fadeOut();
+            },1800);
+        }else{
+            $('.popu_box').show();
+
+        }
+       });
+
+       $(".hide_btn").on('click',function(){
+           $('.popu_box').hide();
+       });
+
+       $("#confirm").on('click',function(){
+
+          var receiver = $("#receiver").val();
+          var phone = $("#phone").val();
+
+          var isChinaName = /^[\u4E00-\u9FA5]{1,6}$/;
+          var telreg = /^1[3|4|5|7|8][0-9]\d{8}$|^\d{8}$/;
+
+          if (receiver.length == 0) {
+//            alert("请输入收货人姓名");
+              $('.tipBox').fadeIn();
+              $('#tip').text("请输入收货人姓名");
+              setTimeout(function () {
+                  $('.tipBox').fadeOut();
+              },1800);
+              $("#rec_name").focus();
+              return false;
+          }
+          if (!isChinaName.test(receiver)) {
+
+              //alert("请准确输入您的收货人姓名");
+              $('.tipBox').fadeIn();
+              $('#tip').text("请准确输入您的收货人姓名");
+              setTimeout(function () {
+                  $('.tipBox').fadeOut();
+              },1800);
+              $("#receiver").val("").focus();
+              return false;
+          }
+          if (phone.length !== 11) {
+              //alert("请输入您的真实手机号");
+              $('.tipBox').fadeIn();
+              $('#tip').text("请输入您的真实手机号");
+              setTimeout(function () {
+                  $('.tipBox').fadeOut();
+              },1800);
+              $("#phone").focus();
+              return false;
+          }
+          if (!telreg.test(phone)) {
+              //alert("请输入正确的手机号！");
+              $('.tipBox').fadeIn();
+              $('#tip').text("请输入正确的手机号！");
+              setTimeout(function () {
+                  $('.tipBox').fadeOut();
+              },1800);
+              $("#rec_iphone").focus();
+              return false;
+          }
+           if ( needAddress == "true" ){
+               address = $("#address").val();
+               if ( address.length == 0 ){
+                   $('.tipBox').fadeIn();
+                   $('#tip').text("请输入您的收货地址！");
+//                   alert( address );
+                   setTimeout(function () {
+                       $('.tipBox').fadeOut();
+                   },1800);
+                   return false;
+               }
+           }
+//          var postName = encodeURI(receiver);
+//          var postAddress = encodeURI(address);
+//          var postGoodName = encodeURI(goodName);
+//         alert(id+","+phone+","+receiver+","+address+","+goodName+","+needInregral+";");
+          // 收货信息
+          $.ajax({
+                type: "post",
+                url: "http://activity.cnmobi.com.cn/activity/personal-center/exchange.html",
+                dataType: "jsonp",
+                data:{
+                    goodsId:id,
+                    phone:phone,
+                    name:receiver,
+                    address: address,
+                    goodsName: goodName,
+                    integral: needInregral
+                },
+                jsonpCallback:"callbackfunction",
+                success: function(json){
+//                    alert(typeof(json.code));
+                    if ( json.code == 0 ) {
+                        $(".popu_box").hide();
+                        $(".exchangeSuccessPupoBox").show();
+                        $("#yesIGotIt").on('click',function () {
+                            location.href = "spent.html";
+                        })
+                    } else if ( json.code == 40060 ){
+                        $('.tipBox').fadeIn();
+                        $('#tip').text("亲，现在系统繁忙，请稍后再尝试一下。");
+                        setTimeout(function () {
+                            $('.tipBox').fadeOut();
+                        },1800);
+                    }else if ( json.code == 40059 ){
+                        $('.tipBox').fadeIn();
+                        $('#tip').text("亲，这个奖品已经被抢光啦，请选择其他奖品兑换。");
+                        setTimeout(function () {
+                            $('.tipBox').fadeOut();
+                            location.href = "spent.html";
+                        },1800);
+                    }
+                },
+                error: function(json){
+                    alert(json.code);
+                }
+           });
+
+       })
+    });
+  </script>
+       <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+       <script>
+
+           var docUrl = document.URL;
+           var requestUrl = "http://icbcigo.cnmobi.com.cn/wsb/api/weixin/auth/js?url="+docUrl;
+           var fileref = document.createElement('script');
+           fileref.setAttribute("type","text/javascript");
+           fileref.setAttribute("src",requestUrl);
+           document.getElementsByTagName("head")[0].appendChild(fileref);
+           wx.ready(function () {
+               wx.hideOptionMenu();
+           });
+
+       </script>
+  </body>
+
+</html>

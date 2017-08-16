@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<!-- saved from url=(0072)http://sen03.3gtuangou.mobi/plugin.php?id=hejin_toupiao&model=rank&vid=1
+-->
+<html xmlns="http://www.w3.org/1999/html">
+  
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta charset="utf-8">
+    <title>账户管理</title>
+    <meta name="description" content="">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/jquery-2.1.3.min.js" type="text/javascript"></script>
+
+
+    <style>
+      html, body {position: relative;height: 100%;}
+      body {
+          background: #f1f2f6;
+          font-family: "Mircrosoft Yahei","微软雅黑",Tahoma, Arial, Helvetica, STHiti;
+          color:#000;
+          margin: 0;
+          padding: 0;
+          min-width: 320px;
+          max-width: 640px;
+          /*min-height: 568px;*/
+          margin: auto;
+          overflow-x: hidden;
+      }
+    </style>
+  </head>
+  
+  <body>
+    
+       <div class="containt ">
+         
+         <!-- 微信昵称 -->
+         <div class="manag_list1">
+           <div class="list_logo fl"><img src="img/nikname.png" class="middle"></div>
+           <div class="list_text fl"><label class="middle" id="nickname"></label></div>
+           <div class="list_arrow fr" style="visibility: hidden;"><img src="img/list_arrow.png" class="middle"></div>
+           <div class="usr_img fr"><img src="" class="middle" id="usrImg"></div>
+         </div>
+
+
+         <div class="manag_list2 clearfix">
+
+           <!-- 真实姓名 -->
+           <div class="list_1st clearfix" id="changename">
+             <div class="logo_img fl"><img src="img/name.png" class="middle"></div>
+             <div class="logo_text fl"><label class="middle">真实姓名</label></div>
+             <div class="list_arrow fr"><img src="img/list_arrow.png" class="middle"></div>
+             <div class="change fr"><label class="middle" id="realname"></label></div>
+           </div>
+
+           <!-- 性别 -->
+           <div class="list_2nd" id="sexchoose">
+             <div class="logo_img fl"><img src="img/sex.png" class="middle"></div>
+             <div class="logo_text fl"><label class="middle">性别</label></div>
+             <div class="list_arrow fr"><img src="img/list_arrow.png" class="middle"></div>
+             <div class="change fr"><label class="middle" id="sex"></label></div>
+           </div>
+
+         </div>
+
+         <div class="manag_list2 clearfix">
+
+           <!-- 电话 -->
+           <div class="list_1st clearfix" id="telphone">
+             <div class="logo_img fl"><img src="img/phone.png" class="middle"></div>
+             <div class="logo_text fl"><label class="middle">电话</label></div>
+             <div class="list_arrow fr"><img src="img/list_arrow.png" class="middle"></div>
+             <div class="change fr"><label class="middle" id="phone"></label></div>
+           </div>
+
+           <!-- 地址管理 -->
+           <div class="list_2nd" id="adress_mng">
+             <div class="logo_img fl"><img src="img/adress.png" class="middle"></div>
+             <div class="logo_text fl"><label class="middle">地址管理</label></div>
+             <div class="list_arrow fr"><img src="img/list_arrow.png" class="middle"></div>
+             <div class="change fr"><label class="middle">修改</label></div>
+           </div>
+
+         </div>
+
+         <div class="manag_list2 clearfix">
+
+           <!-- 生日 -->
+           <div class="list_1st clearfix" id="change_birthday">
+             <div class="logo_img fl"><img src="img/birthday.png" class="middle"></div>
+             <div class="logo_text_1st fl"><label class="middle">生日</label></div>
+             <!-- <div class="logo_text_2nd fl"><label class="middle">2001/01/01</label></div> -->
+             <div class="list_arrow fr"><img src="img/list_arrow.png" class="middle"></div>
+             <div class="change fr"><label class="middle" id="birthday"></label></div>
+           </div>
+
+           <!-- 银行卡 -->
+           <div class="list_2nd" id="bank_crd">
+             <div class="logo_img fl"><img src="img/adress.png" class="middle"></div>
+             <div class="logo_text fl"><label class="middle">银行卡</label></div>
+             <div class="list_arrow fr"><img src="img/list_arrow.png" class="middle"></div>
+             <div class="change fr"><label class="middle"></label></div>
+           </div>
+
+         </div>
+
+
+       </div>
+
+ <script type="text/javascript">
+  $(document).ready(function(){
+    $(".choose_box_se").on('click',function(){
+      $(this).children(".news").hide();
+    })
+    // 跳转
+    // 修改昵称
+    $("#changename").on('click',function() {location.href = "change_name.html";});
+    // 性别
+    $("#sexchoose").on('click',function() {location.href = "sexual.html";});
+    // 电话
+    $('#telphone').on('click',function() {location.href = "change_phone_num.html";});
+    // 地址管理
+    $('#adress_mng').on('click',function() {location.href = "change_address.html";});
+    // 修改生日
+    $('#change_birthday').on('click',function() {location.href = "change_birthday.html";});
+    // 银行卡
+    $('#bank_crd').on('click',function() {location.href = "http://icbcigo.cnmobi.com.cn/wsb/api/ishop/redirect?timestamp=0&action=mybank";});
+    
+    
+    $(function(){
+        // 头像/微信昵称
+        $.ajax({
+             type: "get",
+             async: true,
+             url: "http://activity.cnmobi.com.cn/activity/personal-center/home.html",
+             dataType: "jsonp",
+             jsonpCallback:"callbackfunction",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
+             success: function(json){
+                 if (json.code == 40001) {
+                      location.href = "http://activity.cnmobi.com.cn/activity/personal-center/start.html";//跳回重定向页面
+                 };
+                 $('#nickname').html("");
+                 $('#usrImg').attr('src','');
+                 $('#nickname').html(json.nickname);
+                 $('#usrImg').attr('src',json.headImgUrl);
+                 
+                 // 账户信息
+                 var sexName = ['未知','男','女','保密'];
+                 $.ajax({
+                      type: "post",
+                      async: true,
+                      url: "http://activity.cnmobi.com.cn/activity/personal-center/userinfo.html",
+                      dataType: "jsonp",
+                      jsonpCallback:"callbackfunction",
+                      success: function(json){
+                          $('#realname').html("");
+                          $('#birthday').html("");
+                          $('#sex').html("");
+                          $('#phone').html("");
+                          $('#realname').html(json.realname);
+                          $('#birthday').html(json.birthday);
+                          $('#sex').html(sexName[json.sex]);
+                          $('#phone').html(json.phone);
+                       },
+                       error: function(){}
+                   });
+             },
+             error: function(){}
+         });
+        // alert(sexValue);
+    });
+   
+  })
+ </script>
+
+
+
+
+  </body>
+
+</html>
