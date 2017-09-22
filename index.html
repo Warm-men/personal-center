@@ -30,150 +30,18 @@
           overflow-x: hidden;
       }
     </style>
-      <script src="./js/jquery-2.1.3.min.js" type="text/javascript"></script>
-      <script type="text/javascript">
-          $(document).ready(function(){
-
-              $(".choose_box_se").on('click',function(){
-                  $(this).children(".news").hide();
-              })
-              // 跳转
-              // 编辑
-              $("#user_manag").on('click',function() {location.href = "manage.html";});
-              // 推荐码
-              $("#erweima").on('click',function() {location.href = "recommend_code.html";});
-
-              // 元宝积分
-              $('#yuanbao').on('click',function() {location.href = "ingots.html";});
-              // 爱购券
-              $('#igo_tickit').on('click',function() {location.href = "http://icbcigo.cnmobi.com.cn/wsb/api/ishop/redirect?timestamp=0&action=aigoucenter";});
-              // 礼品券
-              $('#gift_tickit').on('click',function() {location.href = "http://icbcigo.cnmobi.com.cn/wsb/api/ishop/redirect?timestamp=0&action=gift";});
-              // 红包券
-              $('#hongbao_tickit').on('click',function() {location.href = "http://activity.cnmobi.com.cn/activity/fenqi/my.html";});
-
-              // 银行卡
-              // $('#bank_card').on('click',function() {location.href = "http://icbcigo.cnmobi.com.cn/wsb/api/ishop/redirect?timestamp=0&action=mybank";});
-              $('#bank_card').on('click',function() {location.href = "http://icbcigo.cnmobi.com.cn/wsb/api/ishop/redirect?timestamp=0&action=mybank";});
-              // 订单
-              $("#order").on('click',function() {location.href = "order.html";});
-              // 活动
-              $("#active").on('click',function() {location.href = "activity.html";});
-              // 中奖
-              $("#bingo").on('click',function() {location.href = "prize.html";});
-              // 消息
-              $("#my_news").on('click',function() {location.href = "news.html";});
-              // 账单
-              $("#bill").on('click',function() {location.href = "http://icbcigo.cnmobi.com.cn/wsb/api/ishop/redirect?timestamp=0&action=mybank";});
-              // 余额
-              $("#balance").on('click',function() {location.href = "http://icbcigo.cnmobi.com.cn/wsb/api/ishop/redirect?timestamp=0&action=mybank";});
-
-              //加载ajax
-              var integralNum = "";
-              $(function(){
-                  $.ajax({
-                      type: "get",
-                      async: false,
-                      url: "http://activity.cnmobi.com.cn/activity/personal-center/home.html",
-                      dataType: "jsonp",
-                      jsonpCallback:"callbackfunction",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
-                      success: function(json){
-                          if (json.code == 40001) {
-                              location.href = "http://activity.cnmobi.com.cn/activity/personal-center/start.html";
-                          }
-                          $('#nickname').html("");
-                          $('#usrImg').attr('src',"");
-                          $("#integral").html("");
-                          $('#nickname').html(json.nickname);
-                          $('#usrImg').attr('src',json.headImgUrl);
-                          $("#integral").html(json.integral);
-                          integralNum = json.integral;
-                      },
-                      error: function(){}
-                  });
-                  setTimeout(
-                      function () {
-                          $.ajax({
-                              type: "get",
-                              async: true,
-                              url: "http://activity.cnmobi.com.cn/activity/personal-center/isSign.html",
-                              dataType: "jsonp",
-                              jsonpCallback:"callbackfunction",
-                              success: function(json){
-                                  var isSign = json.code;
-                                  if ( isSign==0 ){
-                                      $("#sign").val("签到");
-                                      $("#sign").addClass('noSign');
-                                  }else if ( isSign==1 ){
-                                      $("#sign").val("已签到");
-                                      $("#sign").addClass('isSign');
-                                      sign = false;
-                                  };
-                              },
-                              error: function(){
-                                  alert("005");
-                              }
-                          });
-                      },900
-                  )
-              });
-
-              //签到
-              var sign = true;
-              function add() {
-                  var addIntegral = Number(integralNum) + Number(5);
-                  $("#integral").text(addIntegral);
-              };
-              $("#sign").on('click',function () {
-
-                  if ( sign ){
-                      $.ajax({
-                          type: "get",
-                          asyc: true,
-                          url: "http://activity.cnmobi.com.cn/activity/personal-center/sign.html",
-                          dataType: "jsonp",
-                          jsonpCallback:"callbackfunction",
-                          success:function (json) {
-                              var isSign = json.code;
-                              if ( isSign==1 ) {
-//                      $(".addNum").fadeIn();
-//                      $(".addYuanbao").addClass('flipIn');
-//                      $(".addNum").addClass('flipIn');
-//                      setTimeout(function () {
-//                          $(".addNum").fadeOut();
-//                      },800);
-                                  $('.addYuan').fadeIn();
-                                  setTimeout(function () {
-                                      $('.addYuan').fadeOut();
-                                  },2000);
-                                  sign = false;
-                                  add();//添加元宝
-                                  $("#sign").addClass('isSign');
-                                  $("#sign").attr("value","已签到");
-                              }else {
-                                  alert("系统繁忙");
-                              };
-                          },
-                          error: function () {
-                              alert("004");
-                          }
-                      });
-                  }else if ( !sign ){
-                      $('.tipBox').fadeIn();
-                      $('#tip').text("你今天已经签到过了啦，明天继续来签到吧！");
-                      setTimeout(function () {
-                          $('.tipBox').fadeOut();
-                      },1800);
-                  }
-
-              });
-          })
-      </script>
+      
   </head>
   
   <body>
-    
-       <div class="containt">
+       <div class="loadingBox">
+          <div class="spinner">
+              <div class="bounce1"></div>
+              <div class="bounce2"></div>
+              <div class="bounce3"></div>
+          </div>
+       </div>
+       <div class="containt" style="display: none;">
         <div class="header_con">
          <div class="header clearfix">
            <!-- 头部背景 -->
@@ -259,12 +127,12 @@
 
          <!-- 活动 -->
          <div style="width: 100%; margin-top: 3%; padding: 3%; box-sizing: border-box;">
-            <a href="http://wap.ujia007.com/index/index.htm" style="margin-bottom: 3%; display: block; box-sizing: border-box;">
-               <img src="img/gelan.jpg" >
+            <a href="http://icbcigo.cnmobi.com.cn/wsb/api/ishop/aigoucard/redirect" style="margin-bottom: 3%; display: block; box-sizing: border-box;">
+               <img src="img/aigouyear3.jpg" >
             </a>
-            <a href="http://mp.weixin.qq.com/s/iWV3TLvvHqrZl-naa5G3oQ" style="display: block; box-sizing: border-box;">
+            <!-- <a href="http://mp.weixin.qq.com/s/iWV3TLvvHqrZl-naa5G3oQ" style="display: block; box-sizing: border-box;">
                <img src="img/bishen.png" >
-            </a>
+            </a> -->
          </div>
 
          <!--提示-->
@@ -280,7 +148,143 @@
            </div>
        </div>
 
+<script src="./js/jquery-2.1.3.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    window.onload = function(){
+       $(".loadingBox").hide();
+       $(".containt").show();
+    };
+    $(document).ready(function(){
 
+        $(".choose_box_se").on('click',function(){
+            $(this).children(".news").hide();
+        })
+        // 跳转
+        // 编辑
+        $("#user_manag").on('click',function() {location.href = "manage.html";});
+        // 推荐码
+        $("#erweima").on('click',function() {location.href = "recommend_code.html";});
+
+        // 元宝积分
+        $('#yuanbao').on('click',function() {location.href = "ingots.html";});
+        // 爱购券
+        $('#igo_tickit').on('click',function() {location.href = "http://icbcigo.cnmobi.com.cn/wsb/api/ishop/redirect?timestamp=0&action=aigoucenter";});
+        // 礼品券
+        $('#gift_tickit').on('click',function() {location.href = "http://icbcigo.cnmobi.com.cn/wsb/api/ishop/redirect?timestamp=0&action=gift";});
+        // 红包券
+        $('#hongbao_tickit').on('click',function() {location.href = "http://activity.cnmobi.com.cn/activity/fenqi/my.html";});
+
+        // 银行卡
+        // $('#bank_card').on('click',function() {location.href = "http://icbcigo.cnmobi.com.cn/wsb/api/ishop/redirect?timestamp=0&action=mybank";});
+        $('#bank_card').on('click',function() {location.href = "http://icbcigo.cnmobi.com.cn/wsb/api/ishop/redirect?timestamp=0&action=mybank";});
+        // 订单
+        $("#order").on('click',function() {location.href = "order.html";});
+        // 活动
+        $("#active").on('click',function() {location.href = "activity.html";});
+        // 中奖
+        $("#bingo").on('click',function() {location.href = "prize.html";});
+        // 消息
+        $("#my_news").on('click',function() {location.href = "news.html";});
+        // 账单
+        $("#bill").on('click',function() {location.href = "http://icbcigo.cnmobi.com.cn/wsb/api/ishop/redirect?timestamp=0&action=mybank";});
+        // 余额
+        $("#balance").on('click',function() {location.href = "http://icbcigo.cnmobi.com.cn/wsb/api/ishop/redirect?timestamp=0&action=mybank";});
+
+        //加载ajax
+        var integralNum = "";
+        $(function(){
+            $.ajax({
+                type: "get",
+                async: false,
+                url: "http://activity.cnmobi.com.cn/activity/personal-center/home.html",
+                dataType: "jsonp",
+                jsonpCallback:"callbackfunction",//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写"?"，jQuery会自动为你处理数据
+                success: function(json){
+                    if (json.code == 40001) {
+                        location.href = "http://activity.cnmobi.com.cn/activity/personal-center/start.html";
+                    }
+                    $('#nickname').html("");
+                    $('#usrImg').attr('src',"");
+                    $("#integral").html("");
+                    $('#nickname').html(json.nickname);
+                    $('#usrImg').attr('src',json.headImgUrl);
+                    $("#integral").html(json.integral);
+                    integralNum = json.integral;
+                },
+                error: function(){}
+            });
+            setTimeout(
+                function () {
+                    $.ajax({
+                        type: "get",
+                        async: true,
+                        url: "http://activity.cnmobi.com.cn/activity/personal-center/isSign.html",
+                        dataType: "jsonp",
+                        jsonpCallback:"callbackfunction",
+                        success: function(json){
+                            var isSign = json.code;
+                            if ( isSign==0 ){
+                                $("#sign").val("签到");
+                                $("#sign").addClass('noSign');
+                            }else if ( isSign==1 ){
+                                $("#sign").val("已签到");
+                                $("#sign").addClass('isSign');
+                                sign = false;
+                            };
+                        },
+                        error: function(){
+                            alert("005");
+                        }
+                    });
+                },900
+            )
+        });
+
+        //签到
+        var sign = true;
+        function add() {
+            var addIntegral = Number(integralNum) + Number(5);
+            $("#integral").text(addIntegral);
+        };
+        $("#sign").on('click',function () {
+
+            if ( sign ){
+                $.ajax({
+                    type: "get",
+                    asyc: true,
+                    url: "http://activity.cnmobi.com.cn/activity/personal-center/sign.html",
+                    dataType: "jsonp",
+                    jsonpCallback:"callbackfunction",
+                    success:function (json) {
+                        var isSign = json.code;
+                        if ( isSign==1 ) {
+                            $('.addYuan').fadeIn();
+                            setTimeout(function () {
+                                $('.addYuan').fadeOut();
+                            },2000);
+                            sign = false;
+                            add();//添加元宝
+                            $("#sign").addClass('isSign');
+                            $("#sign").attr("value","已签到");
+                        }else {
+                            alert("系统繁忙");
+                        };
+                    },
+                    error: function () {
+                        alert("004");
+                    }
+                });
+            }else if ( !sign ){
+                $('.tipBox').fadeIn();
+                $('#tip').text("你今天已经签到过了啦，明天继续来签到吧！");
+                setTimeout(function () {
+                    $('.tipBox').fadeOut();
+                },1800);
+            }
+
+        });
+    })
+</script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script>
 

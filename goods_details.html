@@ -188,7 +188,7 @@
                jsonpCallback:"callbackfunction",
                success: function(json){
                    if (json.code == 40001) {
-                            location.href = "http://activity.cnmobi.com.cn/activity/personal-center/start.html";
+                            // location.href = "http://activity.cnmobi.com.cn/activity/personal-center/start.html";
                          }
                    var protoPrice = json.integral,
                        price = (Number(protoPrice/100)).toFixed(2);
@@ -349,7 +349,7 @@
        })
     });
   </script>
-       <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+       <!-- <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
        <script>
 
            var docUrl = document.URL;
@@ -362,7 +362,7 @@
                wx.hideOptionMenu();
            });
 
-       </script>
+       </script> -->
   </body>
 
 </html>
